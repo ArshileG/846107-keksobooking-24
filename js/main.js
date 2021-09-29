@@ -1,19 +1,15 @@
 // Source of Function - https://stackabuse.com/javascript-generate-random-number-in-range/
-function randomNumber(min, max) {
+const randomNumber = function(min, max) {
   if(min < max){
     const randomN = Math.random()*(max-min) + min;
     return Math.floor(randomN);
   } else {
     return NaN;
   }
-}
+};
 
-function checkStrLength(string, length) {
-  if(string.length > length) {
-    return false;
-  }
-  return true;
-}
+const checkStrLength = (string,length) => string.length < length;
+
 
 randomNumber();
 checkStrLength(10, 5);
