@@ -4,8 +4,7 @@ function randomNumber(min, max) {
     const randomN = Math.random()*(max-min) + min;
     return Math.floor(randomN);
   } else {
-    // eslint-disable-next-line no-console
-    console.log('First option should be lower than the second one.');
+    return NaN;
   }
 }
 
