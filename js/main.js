@@ -1,2 +1,2 @@
 import { generateRandObj } from './data.js';
-generateRandObj(10);
+generateRandObj(11);
