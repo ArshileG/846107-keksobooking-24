@@ -1,2 +1,3 @@
+<<<<<<< HEAD
 import { generateRandObj } from './data.js';
-generateRandObj(11);
+generateRandObj(1);
