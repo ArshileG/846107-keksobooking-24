@@ -15,6 +15,12 @@ const randFloatingNumber = (min, max) => {
 const checkStrLength = function(string, length) {
   return string.length < length;
 };
+const getRandomItemsArray = (array, itemsNumber) => {
+  const randArray = [];
+  for (let i = 0; i < itemsNumber; i++) {
+    randArray[i] = array[randNumber(0, array.length - 1)];
+  }
+  return randArray;
+};
 
-
-export {randNumber, randFloatingNumber, checkStrLength};
+export {randNumber, randFloatingNumber, checkStrLength,getRandomItemsArray};
