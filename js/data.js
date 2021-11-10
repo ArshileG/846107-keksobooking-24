@@ -1,4 +1,4 @@
-import  {randNumber, randFloatingNumber} from './utils.js';
+import  {randNumber, randFloatingNumber, getRandomItemsArray} from './utils.js';
 
 const ROOMTITLES = [
   'Studio apartment in old Tbilisi',
@@ -41,13 +41,7 @@ const getAvatarid = (number) => {
   const convertedN = number.toString().padStart(2, '0');
   return `img/avatars/user${convertedN}.png`;
 };
-const getRandomItemsArray = (array, itemsNumber) => {
-  const randArray = [];
-  for (let i = 0; i < itemsNumber; i++) {
-    randArray[i] = array[randNumber(0, array.length - 1)];
-  }
-  return randArray;
-};
+
 function generateRandObj(count) {
   const randObjects = [];
   for(let i = 0; i < count; i++ ){
@@ -68,7 +62,7 @@ function generateRandObj(count) {
         checkout: CHECKINTIME[randNumber(0, CHECKINTIME.length - 1)],
         features: getRandomItemsArray(FEATURES, randNumber(1, FEATURES.length)),
         description: DESCRIPTION[randNumber(0, DESCRIPTION.length - 1)],
-        photos: getRandomItemsArray(PHOTOS, randNumber(1, PHOTOS.length)),
+        photos: getRandomItemsArray(PHOTOS, randNumber(1, PHOTOS.length+1)),
       },
       location: {
         lat:  lat,
