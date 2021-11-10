@@ -1,4 +1,4 @@
-import  {randNumber, randFloatingNumber} from './utils.js';
+import  {randNumber, randFloatingNumber, getRandomItemsArray} from './utils.js';
 
 const ROOMTITLES = [
   'Studio apartment in old Tbilisi',
@@ -45,26 +45,28 @@ const getAvatarid = (number) => {
 function generateRandObj(count) {
   const randObjects = [];
   for(let i = 0; i < count; i++ ){
+    const lat = randFloatingNumber(35.65000,35.70000);
+    const lng = randFloatingNumber(139.70000,139.80000);
     randObjects[i] = {
       author: {
-        avatar: getAvatarid(i+1),
+        avatar: getAvatarid(randNumber(1, 10)),
       },
       offer: {
         title: ROOMTITLES[randNumber(0, ROOMTITLES.length - 1)],
-        address: '',
+        address: `${lat}, ${lng}`,
         price: randNumber(100, 10000),
         type: OFFERS[randNumber(0, OFFERS.length - 1)],
         rooms: randNumber(1, 10),
         guests: randNumber(1, 10),
         checkin: CHECKINTIME[randNumber(0, CHECKINTIME.length - 1)],
         checkout: CHECKINTIME[randNumber(0, CHECKINTIME.length - 1)],
-        features: FEATURES[randNumber(0, FEATURES.length - 1)],
+        features: getRandomItemsArray(FEATURES, randNumber(1, FEATURES.length)),
         description: DESCRIPTION[randNumber(0, DESCRIPTION.length - 1)],
-        photos: PHOTOS[randNumber(0, PHOTOS.length - 1)],
+        photos: getRandomItemsArray(PHOTOS, randNumber(1, PHOTOS.length+1)),
       },
       location: {
-        lat:  randFloatingNumber(35.65000,35.70000),
-        lng: randFloatingNumber(139.70000,139.80000),
+        lat:  lat,
+        lng: lng,
       },
 
     };
