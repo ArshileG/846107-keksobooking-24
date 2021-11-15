@@ -82,19 +82,36 @@ const capacityValidator = () => {
   const adFormGuests = document.querySelector('#capacity');
 
   adFormRooms.addEventListener('change', (evt)=> {
+
+    adFormGuests.value = evt.target.value;
+
     const adFormGuestsList = adFormGuests.querySelectorAll('option');
-    const roomsNumber = evt.target.value;
+    const roomsNumber = parseInt(evt.target.value, 10);
+
 
     adFormGuestsList.forEach((element) => {
 
-      if (element.value <= roomsNumber) {
-        element.removeAttribute('disabled');
+      const guestN = parseInt(element.value, 10);
+
+      if(roomsNumber !== 100){
+        if (guestN <= roomsNumber && guestN !== 0) {
+          element.removeAttribute('disabled');
+        } else {
+          element.setAttribute('disabled', '');
+        }
       } else {
-        element.setAttribute('disabled', '');
+        if (guestN !== 0) {
+          element.setAttribute('disabled', '');
+        } else {
+          element.removeAttribute('disabled');
+        }
       }
     });
+
   });
 };
+
+
 titleValdiator();
 timeInOutValidator();
 priceValidator();
