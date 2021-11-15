@@ -1,9 +1,10 @@
 import { generateRandObj } from './data.js';
 import {createCardFromData} from './randElements.js';
-import {disableForm} from './forms.js';
+import {disableForm,activateForm} from './forms.js';
 
 const randomData = generateRandObj(3);
-//disableForm();
+disableForm();
+activateForm();
 randomData.forEach((randomDataItem) =>{
   createCardFromData(randomDataItem);
 });
