@@ -21,6 +21,7 @@ L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 ).addTo(map);
+
 const mainPinIcon = L.icon ({
   iconUrl: '/img/main-pin.svg',
   iconSize: [52, 52],
@@ -32,7 +33,16 @@ const pinIcon = L.icon ({
   iconAnchor: [20, 40],
 });
 
-mainPinIcon.addTo(map);
+const mainPinMarker = L.marker(
+  {
+    lat: 35.652832,
+    lng: 139.839478,
+  },
+  {
+    icon: mainPinIcon
+  }
+);
+mainPinMarker.addTo(map);
 
 const createMarker = (point) => {
   const {location: {lat, lng}} = point;

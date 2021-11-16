@@ -13,10 +13,7 @@ function createCardFromData(data) {
   const template = templateFragment.querySelector('article');
 
   // Creating empty fragment
-  const fragment = document.createDocumentFragment();
-
-  // Cloning template for usage
-  fragment.appendChild(template.cloneNode(true));
+  const fragment = template.cloneNode(true);
 
   const popupAvatar = fragment.querySelector('.popup__avatar');
   popupAvatar.src = `/${ data.author.avatar}`;
