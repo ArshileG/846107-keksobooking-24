@@ -39,8 +39,8 @@ const mainPinMarker = L.marker(
     lng: 139.839478,
   },
   {
-    icon: mainPinIcon
-  }
+    icon: mainPinIcon,
+  },
 );
 mainPinMarker.addTo(map);
 
