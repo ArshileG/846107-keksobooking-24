@@ -6,7 +6,6 @@ const OFFERSRUS = {
   hotel: 'Отель',
 };
 
-const cardFormPlacement = '#map-canvas';
 
 function createCardFromData(data) {
 
@@ -15,8 +14,6 @@ function createCardFromData(data) {
 
   // Creating empty fragment
   const fragment = document.createDocumentFragment();
-  // Finding div to display test code
-  const placement = document.querySelector(cardFormPlacement);
 
   // Cloning template for usage
   fragment.appendChild(template.cloneNode(true));
@@ -69,7 +66,7 @@ function createCardFromData(data) {
     }
   });
 
-  placement.appendChild(fragment);
+  return fragment;
 
 }
 
