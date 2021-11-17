@@ -20,6 +20,8 @@ L.tileLayer(
   },
 ).addTo(map);
 
+const markerGroup = L.layerGroup().addTo(map);
+
 const mainPinIcon = L.icon ({
   iconUrl: '/img/main-pin.svg',
   iconSize: [52, 52],
@@ -62,7 +64,7 @@ const createMarker = (point) => {
   );
 
   marker
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(createCardFromData(point));
 };
 
