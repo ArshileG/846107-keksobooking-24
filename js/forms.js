@@ -1,11 +1,17 @@
+import {startingLat, startingLng, resetMap} from './map.js';
+
+const adForm = document.querySelector('.ad-form');
+const adFormPrice = document.querySelector('#price');
+const adFormTypes = document.querySelector('#type');
+const adFormAddress = document.querySelector('#address');
+const mapFilter = document.querySelector('.map__filters');
+
 const disableForm = () => {
-  const adForm = document.querySelector('.ad-form');
   adForm.classList.add('ad-form--disabled');
   const adFormElements = adForm.querySelectorAll('fieldset');
   adFormElements.forEach((adFormElement) => {
     adFormElement.toggleAttribute('disabled');
   });
-  const mapFilter = document.querySelector('.map__filters');
   mapFilter.classList.add('map__filters--disabled');
   const mapFilterElements = mapFilter.children;
   Array.from(mapFilterElements).forEach((mapFilterElement) => {
@@ -13,13 +19,12 @@ const disableForm = () => {
   });
 };
 const activateForm = () => {
-  const adForm = document.querySelector('.ad-form');
   adForm.classList.remove('ad-form--disabled');
   const adFormElements = adForm.querySelectorAll('fieldset');
   adFormElements.forEach((adFormElement) => {
     adFormElement.toggleAttribute('disabled');
   });
-  const mapFilter = document.querySelector('.map__filters');
+
   mapFilter.classList.remove('map__filters--disabled');
   const mapFilterElements = mapFilter.children;
   Array.from(mapFilterElements).forEach((mapFilterElement) => {
@@ -60,7 +65,7 @@ const minPriceForTypes = {
 };
 
 const priceValidator = () =>{
-  const adFormPrice = document.querySelector('#price');
+
   adFormPrice.addEventListener('input', ()=> {
     if(adFormPrice.validity.rangeOverflow){
       adFormPrice.setCustomValidity('Max Price is set to 1 000 000 Ruble.');
@@ -69,7 +74,6 @@ const priceValidator = () =>{
     }
   });
 
-  const adFormTypes = document.querySelector('#type');
   adFormTypes.addEventListener('change', (evt)=> {
     adFormPrice.setAttribute('min', minPriceForTypes[evt.target.value]);
     adFormPrice.setAttribute('placeholder', minPriceForTypes[evt.target.value]);
@@ -111,6 +115,82 @@ const capacityValidator = () => {
   });
 };
 
+const adFormSubmit = (onSuccess, onFail) => {
+  adForm.addEventListener('submit', (evt)=> {
+    evt.preventDefault();
+
+    const formData = new FormData(evt.target);
+
+    fetch(
+      'https://24.javascript.pages.academy/keksobooking',
+      {
+        method: 'POST',
+        body: formData,
+      },
+    )
+
+      .then((response) => {
+        if(response.ok) {
+          onSuccess();
+          resetAll();
+        }else {
+          onFail();
+        }
+      });
+
+  });
+};
+
+const successMsg = () => {
+  const successMsgTemplate = document.querySelector('#success').content;
+  const successMsgDiv = successMsgTemplate.querySelector('.success');
+
+  const successFragment = successMsgDiv.cloneNode(true);
+  document.body.appendChild(successFragment);
+
+  document.addEventListener('keydown', (evt)=> {
+    if(evt.key === 'Escape'){
+      successFragment.remove();
+    }
+  });
+  document.addEventListener('click', ()=> {
+    successFragment.remove();
+  });
+};
+const errorMsg = () => {
+  const errorMsgTemplate = document.querySelector('#error').content;
+  const errorMsgDiv = errorMsgTemplate.querySelector('.error');
+
+  const errorFragment = errorMsgDiv.cloneNode(true);
+  document.body.appendChild(errorFragment);
+
+  document.addEventListener('keydown', (evt)=> {
+    if(evt.key === 'Escape'){
+      errorFragment.remove();
+    }
+  });
+  document.addEventListener('click', ()=> {
+    errorFragment.remove();
+  });
+
+  const tryAgainBtn = document.querySelector('error__button');
+  tryAgainBtn.addEventListener('submit', ()=> {
+    errorFragment.remove();
+  });
+};
+
+const adFormReset = () => {
+  adForm.reset();
+  adFormPrice.placeholder = minPriceForTypes[adFormTypes.value];
+  adFormAddress.value = `${startingLat}, ${startingLng}`;
+
+};
+
+function resetAll() {
+  resetMap();
+  mapFilter.reset();
+  adFormReset();
+}
 
 titleValdiator();
 timeInOutValidator();
@@ -119,5 +199,11 @@ capacityValidator();
 
 export {
   disableForm,
-  activateForm
+  activateForm,
+  adFormSubmit,
+  adFormReset,
+  successMsg,
+  errorMsg,
+  resetAll,
+  adFormAddress
 };
