@@ -44,21 +44,27 @@ function createCardFromData(data) {
 
   const popupPhotos= fragment.querySelector('.popup__photos');
   popupPhotos.innerHTML = '';
-  data.offer.photos.forEach((photoLink) => {
-    const popupImg = document.createElement('img');
-    popupImg.src = photoLink;
-    popupImg.width = 45;
-    popupImg.height = 40;
-    popupImg.classList.add('popup__photo');
-    popupPhotos.appendChild(popupImg);
-  });
+  const checkPhoto = data.offer.photos;
+  if(checkPhoto){
+    data.offer.photos.forEach((photoLink) => {
+      const popupImg = document.createElement('img');
+      popupImg.src = photoLink;
+      popupImg.width = 45;
+      popupImg.height = 40;
+      popupImg.classList.add('popup__photo');
+      popupPhotos.appendChild(popupImg);
+    });
+  }
 
   const popupFeaturesList = fragment.querySelectorAll('.popup__feature');
   popupFeaturesList.forEach((featuresItem) => {
-    const isNecessary = data.offer.features.some(
-      (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
-    );
-    if(!isNecessary){
+
+    const isNecessary = data.offer.features;
+    if(isNecessary) {
+      data.offer.features.some(
+        (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
+      );
+    } else {
       featuresItem.remove();
     }
   });
