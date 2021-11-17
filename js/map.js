@@ -1,7 +1,7 @@
 import {createCardFromData} from './randElements.js';
 import {activateForm, disableForm, adFormAddress} from './forms.js';
 
-const startingLat = 35.652832, startingLng = 139.839478;
+const STARTLATLNG = { lat: 35.652832, lng: 139.839478};
 
 disableForm();
 const map = L.map('map')
@@ -9,8 +9,8 @@ const map = L.map('map')
     activateForm();
   })
   .setView({
-    lat: 35.652832,
-    lng: 139.839478,
+    lat: STARTLATLNG.lat,
+    lng: STARTLATLNG.lng,
   }, 10);
 
 L.tileLayer(
@@ -70,17 +70,17 @@ const createMarker = (point) => {
 const resetMap = () => {
 
   mainPinMarker.setLatLng({
-    lat: startingLat,
-    lng: startingLng,
+    lat: STARTLATLNG.lat,
+    lng: STARTLATLNG.lng,
   });
 
   map.setView({
-    lat: startingLat,
-    lng: startingLng,
+    lat: STARTLATLNG.lat,
+    lng: STARTLATLNG.lng,
   }, 10);
   map.closePopup();
 
 };
 
 
-export {createMarker, resetMap, startingLat, startingLng};
+export {createMarker, resetMap, STARTLATLNG};

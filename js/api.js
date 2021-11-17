@@ -1,19 +1,22 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+
+const SENDSERVER = 'https://24.javascript.pages.academy/keksobooking';
+const GETSERVER = 'https://24.javascript.pages.academy/keksobooking/data';
+
 const getData = (onSuccess) => {
-  fetch('https://24.javascript.pages.academy/keksobooking/data')
+  fetch(GETSERVER)
     .then((response) => response.json())
     .then((data) => {
-	  	data.forEach((element) => {
+      data.forEach((element) => {
         onSuccess(element);
-	  	});
+      });
     })
     .catch(() => {
       //alert('Не удалось отправить форму. Попробуйте ещё раз');
     });
 };
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (onSuccess, onFail, reset, body) => {
   fetch(
-    'https://24.javascript.pages.academy/code-and-magick',
+    SENDSERVER,
     {
       method: 'POST',
       body,
@@ -22,6 +25,7 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
+        reset();
       } else {
         onFail('Не удалось отправить форму. Попробуйте ещё раз');
       }

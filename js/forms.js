@@ -1,4 +1,6 @@
-import {startingLat, startingLng, resetMap} from './map.js';
+import {STARTLATLNG, resetMap} from './map.js';
+import { sendData } from './api.js';
+
 
 const adForm = document.querySelector('.ad-form');
 const adFormPrice = document.querySelector('#price');
@@ -120,23 +122,8 @@ const adFormSubmit = (onSuccess, onFail) => {
     evt.preventDefault();
 
     const formData = new FormData(evt.target);
+    sendData(onSuccess, onFail, resetAll, formData);
 
-    fetch(
-      'https://24.javascript.pages.academy/keksobooking',
-      {
-        method: 'POST',
-        body: formData,
-      },
-    )
-
-      .then((response) => {
-        if(response.ok) {
-          onSuccess();
-          resetAll();
-        }else {
-          onFail();
-        }
-      });
 
   });
 };
@@ -182,7 +169,7 @@ const errorMsg = () => {
 const adFormReset = () => {
   adForm.reset();
   adFormPrice.placeholder = minPriceForTypes[adFormTypes.value];
-  adFormAddress.value = `${startingLat}, ${startingLng}`;
+  adFormAddress.value = `${STARTLATLNG.lat}, ${STARTLATLNG.lng}`;
 
 };
 
