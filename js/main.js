@@ -1,6 +1,6 @@
 import {} from './api.js';
 import {createMarker, clearMarker} from './map.js';
-import {createCardFromData} from './randElements.js';
+import {createCardFromData} from './randelements.js';
 import {filterByType,filterByPrice,filterByRooms,filterByGuests} from './filter.js';
 import {adFormSubmit, successMsg, errorMsg, resetAll} from './forms.js';
 
