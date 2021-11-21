@@ -1,5 +1,4 @@
-import {createCardFromData} from './randElements.js';
-import {activateForm, disableForm, adFormAddress} from './forms.js';
+import {activateForm, disableForm, adFormAddress, mapFilter} from './forms.js';
 
 const startingLat = 35.652832, startingLng = 139.839478;
 
@@ -51,7 +50,7 @@ mainPinMarker.on('move', (ev) => {
 });
 
 
-const createMarker = (point) => {
+const createMarker = (point, datacreator) => {
   const {location: {lat, lng}} = point;
   const marker = L.marker(
     {
@@ -65,7 +64,7 @@ const createMarker = (point) => {
 
   marker
     .addTo(markerGroup)
-    .bindPopup(createCardFromData(point));
+    .bindPopup(datacreator(point));
 };
 
 
@@ -81,8 +80,11 @@ const resetMap = () => {
     lng: startingLng,
   }, 10);
   map.closePopup();
+  mapFilter.reset();
 
 };
+const clearMarker = () => {
+  markerGroup.clearLayers();
+};
 
-
-export {createMarker, resetMap, startingLat, startingLng};
+export {createMarker, resetMap, startingLat, startingLng, clearMarker};

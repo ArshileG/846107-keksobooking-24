@@ -32,20 +32,21 @@ function createCardFromData(data) {
   popupCapacity.textContent = `${data.offer.rooms  } комнаты для ${  data.offer.guests } гостей`;
 
   const popupTime = fragment.querySelector('.popup__text--time');
-  popupTime.textContent = `Заезд после${  data.offer.checkin  } выезд до ${  data.offer.checkout}` ;
+  popupTime.textContent = `Заезд после${  data.offer.checkin  } выезд до ${  data.offer.checkout}`;
 
-  const popupType= fragment.querySelector('.popup__type');
+  const popupType = fragment.querySelector('.popup__type');
   popupType.textContent = OFFERSRUS[data.offer.type];
 
-  const popupDesc= fragment.querySelector('.popup__description');
-  if(data.offer.description){
+  const popupDesc = fragment.querySelector('.popup__description');
+  '';
+  if (data.offer.description) {
     popupDesc.textContent = data.offer.description;
   }
 
-  const popupPhotos= fragment.querySelector('.popup__photos');
+  const popupPhotos = fragment.querySelector('.popup__photos');
   popupPhotos.innerHTML = '';
   const checkPhoto = data.offer.photos;
-  if(checkPhoto){
+  if (checkPhoto) {
     data.offer.photos.forEach((photoLink) => {
       const popupImg = document.createElement('img');
       popupImg.src = photoLink;
@@ -57,20 +58,23 @@ function createCardFromData(data) {
   }
 
   const popupFeaturesList = fragment.querySelectorAll('.popup__feature');
+
   popupFeaturesList.forEach((featuresItem) => {
 
-    const isNecessary = data.offer.features;
-    if(isNecessary) {
-      data.offer.features.some(
-        (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
-      );
-    } else {
-      featuresItem.remove();
-    }
+    // const isNecessary = data.offer.features.some(
+    //   (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
+    // );
+
+    // if (!isNecessary) {
+    //   featuresItem.remove();
+    // }
+
   });
 
   return fragment;
 
 }
 
-export {createCardFromData};
+export {
+  createCardFromData
+};
