@@ -49,9 +49,9 @@ function checkFeatures(element){
   const featuresArray = element.offer.features;
 
   if(featuresArray !== undefined){
-    featuresArray.forEach(element => {
+    featuresArray.forEach((featureItem) => {
       for(let i = 0; i < requiredFilters.length; i++){
-        if(element === requiredFilters[i]){
+        if(featureItem === requiredFilters[i]){
           rank++;
         }
       }
@@ -81,7 +81,7 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
       const housingRooms = document.querySelector('#housing-rooms');
       const housingGuests = document.querySelector('#housing-guests');
 
-      //console.log(housingFeatures.checked );
+
       filtered = data.sort(compareByFeatures).filter((element) => {
         if (filterByType(element, housingType.value) &&
           filterByPrice(element, housingPrice.value) &&
@@ -90,15 +90,14 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
           return true;
         }
       });
-      console.log(filtered);
       renderMarkers(filtered);
 
       resetBtn.addEventListener('click', (evt) => {
-  evt.preventDefault();
+        evt.preventDefault();
 
-  resetAll();
+        resetAll();
 
-});
+      });
 
     });
 
@@ -117,6 +116,3 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
 
 
 adFormSubmit(successMsg, errorMsg);
-
-
-
