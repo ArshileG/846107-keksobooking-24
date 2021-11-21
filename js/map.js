@@ -1,4 +1,4 @@
-import {activateForm, disableForm, adFormAddress, mapFilter} from './forms.js';
+import {activateForm, disableForm, adFormAddress} from './forms.js';
 
 const START_LAT = 35.652832, START_LNG = 139.839478;
 
@@ -80,7 +80,6 @@ const resetMap = () => {
     lng: START_LNG,
   }, 10);
   map.closePopup();
-  mapFilter.reset();
 
 };
 const clearMarker = () => {

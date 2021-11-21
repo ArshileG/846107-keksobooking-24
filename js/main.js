@@ -71,9 +71,8 @@ function compareByFeatures(el1, el2){
 fetch('https://24.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
   .then((data) => {
-
     renderMarkers(data);
-    let filtered = data.slice();
+    let filtered;
 
     mapForm.addEventListener('change', () => {
       const housingType = document.querySelector('#housing-type');
@@ -90,7 +89,9 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
           return true;
         }
       });
+
       renderMarkers(filtered);
+
 
       resetBtn.addEventListener('click', (evt) => {
         evt.preventDefault();

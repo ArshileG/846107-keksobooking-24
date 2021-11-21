@@ -6,6 +6,7 @@ const adFormPrice = document.querySelector('#price');
 const adFormTypes = document.querySelector('#type');
 const adFormAddress = document.querySelector('#address');
 const mapFilter = document.querySelector('.map__filters');
+const adFormTitle = document.querySelector('#title');
 
 const disableForm = () => {
   adForm.classList.add('ad-form--disabled');
@@ -35,7 +36,6 @@ const activateForm = () => {
 };
 
 const titleValdiator = () => {
-  const adFormTitle = document.querySelector('#title');
   adFormTitle.addEventListener('input', ()=> {
     if(adFormTitle.validity.tooShort){
       adFormTitle.setCustomValidity('Title is too short! Use more than 30 symbol.');
@@ -177,6 +177,7 @@ const adFormReset = () => {
 
 function resetAll() {
   resetMap();
+  mapFilter.reset();
   adFormReset();
 }
 
@@ -193,6 +194,5 @@ export {
   successMsg,
   errorMsg,
   resetAll,
-  mapFilter,
   adFormAddress
 };

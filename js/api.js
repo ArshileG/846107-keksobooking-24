@@ -1,3 +1,6 @@
+//const HOST_SERVER = 'https://24.javascript.pages.academy/keksobooking/data';
+const DESTINATION_SERVER = 'https://24.javascript.pages.academy/keksobooking';
+
 // const getData = (onSuccess) => {
 //   fetch('https://24.javascript.pages.academy/keksobooking/data')
 //     .then((response) => response.json())
@@ -14,7 +17,7 @@
 
 const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://24.javascript.pages.academy/keksobooking',
+    DESTINATION_SERVER,
     {
       method: 'POST',
       body,
