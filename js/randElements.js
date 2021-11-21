@@ -61,7 +61,6 @@ function createCardFromData(data) {
 
 
   popupFeaturesList.forEach((featuresItem) => {
-    console.log(!data.offer.features);
     if (!data.offer.features) {
       featuresItem.remove();
       return;
