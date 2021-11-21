@@ -46,7 +46,7 @@ mainPinMarker.addTo(map);
 
 
 mainPinMarker.on('move', (ev) => {
-  adFormAddress.value = `${ev.latlng.lat}, ${ev.latlng.lng}`;
+  adFormAddress.value = `${ev.latlng.lat.toFixed(5)}, ${ev.latlng.lng.toFixed(5)}`;
 });
 
 
