@@ -5,6 +5,7 @@ import {filterByType,filterByPrice,filterByRooms,filterByGuests} from './filter.
 import {adFormSubmit, successMsg, errorMsg, resetAll} from './forms.js';
 
 const mapForm = document.querySelector('.map__filters');
+const resetBtn = document.querySelector('.ad-form__reset');
 
 const renderMarkers = (data) => {
   clearMarker();
@@ -14,30 +15,58 @@ const renderMarkers = (data) => {
 
 };
 
+function checkFeatures(element){
 
-// function checkFeatures(element){
+  const filterWifi = document.querySelector('#filter-wifi').checked;
+  const filterDishwasher = document.querySelector('#filter-dishwasher').checked;
+  const filterWasher = document.querySelector('#filter-washer').checked;
+  const filterParking = document.querySelector('#filter-parking').checked;
+  const filterElevator = document.querySelector('#filter-elevator').checked;
+  const filterConditioner = document.querySelector('#filter-conditioner').checked;
 
-//   const filterWifi = document.querySelector('#filter-wifi');
-//   const filterDishwasher = document.querySelector('#filter-dishwasher');
+  const requiredFilters = [];
+
+  if(filterConditioner) {
+    requiredFilters.push('conditioner');
+  }
+  if(filterElevator) {
+    requiredFilters.push('elevator');
+  }
+  if(filterParking) {
+    requiredFilters.push('parking');
+  }
+  if(filterWasher) {
+    requiredFilters.push('washer');
+  }
+  if(filterDishwasher) {
+    requiredFilters.push('dishwasher');
+  }
+  if(filterWifi) {
+    requiredFilters.push('wifi');
+  }
+
+  let rank = 0;
+  const featuresArray = element.offer.features;
+
+  if(featuresArray !== undefined){
+    featuresArray.forEach(element => {
+      for(let i = 0; i < requiredFilters.length; i++){
+        if(element === requiredFilters[i]){
+          rank++;
+        }
+      }
+    });
+  }
+  return rank;
 
 
-//   let rank = 0;
-//   if(element.offer.features.wifi === undefined){
+}
+function compareByFeatures(el1, el2){
+  const rankA = checkFeatures(el1);
+  const rankB = checkFeatures(el2);
 
-//   } else {
-//     rank++;
-
-//   }
-//   return rank;
-
-
-// }
-// function compareByFeatures(el1, el2){
-//   const rankA = checkFeatures(el1);
-//   const rankB = checkFeatures(el2);
-
-//   return rankB - rankA;
-// }
+  return rankB - rankA;
+}
 
 fetch('https://24.javascript.pages.academy/keksobooking/data')
   .then((response) => response.json())
@@ -53,7 +82,7 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
       const housingGuests = document.querySelector('#housing-guests');
 
       //console.log(housingFeatures.checked );
-      filtered = data.filter((element) => {
+      filtered = data.sort(compareByFeatures).filter((element) => {
         if (filterByType(element, housingType.value) &&
           filterByPrice(element, housingPrice.value) &&
           filterByRooms(element, housingRooms.value) &&
@@ -63,6 +92,21 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
       });
       console.log(filtered);
       renderMarkers(filtered);
+
+      resetBtn.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+  resetAll();
+
+});
+
+    });
+
+    resetBtn.addEventListener('click', (evt) => {
+      evt.preventDefault();
+
+      resetAll();
+      renderMarkers(data);
 
     });
 
@@ -74,11 +118,5 @@ fetch('https://24.javascript.pages.academy/keksobooking/data')
 
 adFormSubmit(successMsg, errorMsg);
 
-const resetBtn = document.querySelector('.ad-form__reset');
 
-resetBtn.addEventListener('click', (evt) => {
-  evt.preventDefault();
 
-  resetAll();
-
-});

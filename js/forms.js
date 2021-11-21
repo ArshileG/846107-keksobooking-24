@@ -176,7 +176,6 @@ const adFormReset = () => {
 
 function resetAll() {
   resetMap();
-  mapFilter.reset();
   adFormReset();
 }
 
@@ -193,5 +192,6 @@ export {
   successMsg,
   errorMsg,
   resetAll,
+  mapFilter,
   adFormAddress
 };
