@@ -1,5 +1,4 @@
-import {createCardFromData} from './randElements.js';
-import {activateForm, disableForm, adFormAddress} from './forms.js';
+import {activateForm, disableForm, adFormAddress, mapFilter} from './forms.js';
 
 const startingLat = 35.652832, startingLng = 139.839478;
 
@@ -81,6 +80,7 @@ const resetMap = () => {
     lng: startingLng,
   }, 10);
   map.closePopup();
+  mapFilter.reset();
 
 };
 const clearMarker = () => {
