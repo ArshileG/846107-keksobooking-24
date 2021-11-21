@@ -51,7 +51,7 @@ mainPinMarker.on('move', (ev) => {
 });
 
 
-const createMarker = (point) => {
+const createMarker = (point, datacreator) => {
   const {location: {lat, lng}} = point;
   const marker = L.marker(
     {
@@ -65,7 +65,7 @@ const createMarker = (point) => {
 
   marker
     .addTo(markerGroup)
-    .bindPopup(createCardFromData(point));
+    .bindPopup(datacreator(point));
 };
 
 
@@ -83,6 +83,8 @@ const resetMap = () => {
   map.closePopup();
 
 };
+const clearMarker = () => {
+  markerGroup.clearLayers();
+};
 
-
-export {createMarker, resetMap, startingLat, startingLng};
+export {createMarker, resetMap, startingLat, startingLng, clearMarker};
