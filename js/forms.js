@@ -20,6 +20,7 @@ const disableForm = () => {
   });
 };
 const activateForm = () => {
+  adFormAddress.value = `${startingLat.toFixed(5)}, ${startingLng.toFixed(5)}`;
   adForm.classList.remove('ad-form--disabled');
   const adFormElements = adForm.querySelectorAll('fieldset');
   adFormElements.forEach((adFormElement) => {
@@ -170,7 +171,7 @@ const errorMsg = () => {
 const adFormReset = () => {
   adForm.reset();
   adFormPrice.placeholder = minPriceForTypes[adFormTypes.value];
-  adFormAddress.value = `${startingLat}, ${startingLng}`;
+  adFormAddress.value = `${startingLat.toFixed(5)}, ${startingLng.toFixed(5)}`;
 
 };
 
