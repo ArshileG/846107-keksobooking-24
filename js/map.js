@@ -1,6 +1,6 @@
 import {activateForm, disableForm, adFormAddress, mapFilter} from './forms.js';
 
-const startingLat = 35.652832, startingLng = 139.839478;
+const START_LAT = 35.652832, START_LNG = 139.839478;
 
 disableForm();
 const map = L.map('map')
@@ -71,13 +71,13 @@ const createMarker = (point, datacreator) => {
 const resetMap = () => {
 
   mainPinMarker.setLatLng({
-    lat: startingLat,
-    lng: startingLng,
+    lat: START_LAT,
+    lng: START_LNG,
   });
 
   map.setView({
-    lat: startingLat,
-    lng: startingLng,
+    lat: START_LAT,
+    lng: START_LNG,
   }, 10);
   map.closePopup();
   mapFilter.reset();
@@ -87,4 +87,4 @@ const clearMarker = () => {
   markerGroup.clearLayers();
 };
 
-export {createMarker, resetMap, startingLat, startingLng, clearMarker};
+export {createMarker, resetMap, START_LAT as startingLat, START_LNG as startingLng, clearMarker};
