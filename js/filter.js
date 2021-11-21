@@ -1,4 +1,4 @@
-const PRICETYPES = {
+const PRICE_TYPES = {
   low: 10000,
   middle: {min: 10000, max: 50000},
   high: 50000,
@@ -16,17 +16,17 @@ function filterByPrice(array, filterValue) {
     case 'any':
       return true;
     case 'low':
-      if (array.offer.price < PRICETYPES[filterValue]) {
+      if (array.offer.price < PRICE_TYPES[filterValue]) {
         return true;
       }
       break;
     case 'middle':
-      if (array.offer.price < PRICETYPES[filterValue].max && array.offer.price > PRICETYPES[filterValue].min) {
+      if (array.offer.price < PRICE_TYPES[filterValue].max && array.offer.price > PRICE_TYPES[filterValue].min) {
         return true;
       }
       break;
     case 'high':
-      if (array.offer.price > PRICETYPES[filterValue]) {
+      if (array.offer.price > PRICE_TYPES[filterValue]) {
         return true;
       }
       break;

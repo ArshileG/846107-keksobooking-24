@@ -1,4 +1,4 @@
-const OFFERSRUS = {
+const OFFERS_RUS = {
   palace: 'Дворец',
   flat: 'Квартира',
   house: 'Дом',
@@ -35,7 +35,7 @@ function createCardFromData(data) {
   popupTime.textContent = `Заезд после${  data.offer.checkin  } выезд до ${  data.offer.checkout}`;
 
   const popupType = fragment.querySelector('.popup__type');
-  popupType.textContent = OFFERSRUS[data.offer.type];
+  popupType.textContent = OFFERS_RUS[data.offer.type];
 
   const popupDesc = fragment.querySelector('.popup__description');
   '';
@@ -61,13 +61,13 @@ function createCardFromData(data) {
 
   popupFeaturesList.forEach((featuresItem) => {
 
-    // const isNecessary = data.offer.features.some(
-    //   (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
-    // );
+    const isNecessary = data.offer.features.some(
+      (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
+    );
 
-    // if (!isNecessary) {
-    //   featuresItem.remove();
-    // }
+    if (!isNecessary) {
+      featuresItem.remove();
+    }
 
   });
 
