@@ -61,13 +61,13 @@ function createCardFromData(data) {
 
   popupFeaturesList.forEach((featuresItem) => {
 
-    const isNecessary = data.offer.features.some(
-      (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
-    );
+    // const isNecessary = data.offer.features.some(
+    //   (featureTypeItem) => featuresItem.classList.contains(`popup__feature--${  featureTypeItem}`),
+    // );
 
-    if (!isNecessary) {
-      featuresItem.remove();
-    }
+    // if (!isNecessary) {
+    //   featuresItem.remove();
+    // }
 
   });
 
