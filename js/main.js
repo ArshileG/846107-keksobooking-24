@@ -3,7 +3,6 @@ import {createMarker, clearMarker} from './map.js';
 import {createCardFromData} from './randelements.js';
 import {filterMap} from './filter.js';
 import {adFormSubmit, successMsg, errorMsg} from './forms.js';
-import {debounce} from './utils.js';
 
 
 const renderMarkers = (data) => {
@@ -20,8 +19,7 @@ const renderMarkers = (data) => {
 
 getData((data) => {
   renderMarkers(data);
-  debounce(filterMap(data, renderMarkers));
-
+  filterMap(data, renderMarkers);
 });
 
 adFormSubmit(successMsg, errorMsg);

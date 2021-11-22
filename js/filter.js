@@ -1,4 +1,5 @@
 import { resetAll } from './forms.js';
+import { debounce } from './utils.js';
 
 const PRICE_TYPES = {
   low: 10000,
@@ -38,7 +39,7 @@ const filterByPrice = (array, filterValue) => {
 };
 
 const filterByRooms = (offerItemValue, filterValue) => {
-  if (offerItemValue.offer.rooms <= filterValue || filterValue === 'any') {
+  if (offerItemValue.offer.rooms === +filterValue || filterValue === 'any') {
     return true;
   }
 };
@@ -102,11 +103,17 @@ const compareByFeatures = (el1, el2) => {
   return rankB - rankA;
 };
 
+function trapecia() {
+
+
+}
+
 const filterMap = (data, cb) => {
   const mapForm = document.querySelector('.map__filters');
   const resetBtn = document.querySelector('.ad-form__reset');
-  mapForm.addEventListener('change', () => {
 
+
+  const mapFilterChange = () => {
     const housingType = document.querySelector('#housing-type');
     const housingPrice = document.querySelector('#housing-price');
     const housingRooms = document.querySelector('#housing-rooms');
@@ -123,9 +130,9 @@ const filterMap = (data, cb) => {
     });
 
     cb(filtered);
+  };
 
-
-  });
+  mapForm.addEventListener('change', debounce(mapFilterChange, 500));
 
   resetBtn.addEventListener('click', (evt) => {
     evt.preventDefault();
