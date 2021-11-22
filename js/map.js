@@ -1,6 +1,20 @@
 import {activateForm, disableForm, adFormAddress} from './forms.js';
 
-const START_LAT = 35.652832, START_LNG = 139.839478;
+const MAP_SETTINGS = {
+  baseLat: 35.652832,
+  baseLng: 139.839478,
+  mapView: 10,
+};
+const PIN_SIZES = {
+  mainPin: {
+    iconSize: {width: 52, height: 52},
+    iconAnchor: {width: 26, height: 52},
+  },
+  pin: {
+    iconSize:{width: 40, height: 40},
+    iconAnchor: {width: 26, height: 52},
+  },
+};
 
 disableForm();
 const map = L.map('map')
@@ -8,9 +22,9 @@ const map = L.map('map')
     activateForm();
   })
   .setView({
-    lat: 35.652832,
-    lng: 139.839478,
-  }, 10);
+    lat: MAP_SETTINGS.baseLat,
+    lng: MAP_SETTINGS.baseLng,
+  }, MAP_SETTINGS.mapView);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -23,19 +37,19 @@ const markerGroup = L.layerGroup().addTo(map);
 
 const mainPinIcon = L.icon ({
   iconUrl: '/img/main-pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+  iconSize: [PIN_SIZES.mainPin.iconSize.width, PIN_SIZES.mainPin.iconSize.height],
+  iconAnchor: [PIN_SIZES.mainPin.iconAnchor.width, PIN_SIZES.mainPin.iconAnchor.height],
 });
 const pinIcon = L.icon ({
   iconUrl: '/img/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconSize: [PIN_SIZES.pin.iconSize.width, PIN_SIZES.pin.iconSize.height],
+  iconAnchor: [PIN_SIZES.pin.iconAnchor.width, PIN_SIZES.pin.iconAnchor.height],
 });
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.652832,
-    lng: 139.839478,
+    lat: MAP_SETTINGS.baseLat,
+    lng: MAP_SETTINGS.baseLng,
   },
   {
     icon: mainPinIcon,
@@ -71,14 +85,14 @@ const createMarker = (point, datacreator) => {
 const resetMap = () => {
 
   mainPinMarker.setLatLng({
-    lat: START_LAT,
-    lng: START_LNG,
+    lat: MAP_SETTINGS.baseLat,
+    lng: MAP_SETTINGS.baseLng,
   });
 
   map.setView({
-    lat: START_LAT,
-    lng: START_LNG,
-  }, 10);
+    lat: MAP_SETTINGS.baseLat,
+    lng: MAP_SETTINGS.baseLng,
+  }, MAP_SETTINGS.mapView);
   map.closePopup();
 
 };
@@ -86,4 +100,4 @@ const clearMarker = () => {
   markerGroup.clearLayers();
 };
 
-export {createMarker, resetMap, START_LAT as startingLat, START_LNG as startingLng, clearMarker};
+export {createMarker, resetMap, MAP_SETTINGS, clearMarker};
