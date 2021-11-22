@@ -98,7 +98,6 @@ const capacityValidator = () => {
     const adFormGuestsList = adFormGuests.querySelectorAll('option');
     const roomsNumber = parseInt(evt.target.value, 10);
 
-
     adFormGuestsList.forEach((element) => {
 
       const guestsNumber = parseInt(element.value, 10);
