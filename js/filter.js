@@ -1,9 +1,16 @@
-import { resetAll } from './forms.js';
-import { debounce } from './utils.js';
+import {
+  resetAll
+} from './forms.js';
+import {
+  debounce
+} from './utils.js';
 
 const PRICE_TYPES = {
   low: 10000,
-  middle: {min: 10000, max: 50000},
+  middle: {
+    min: 10000,
+    max: 50000
+  },
   high: 50000,
 };
 
@@ -103,10 +110,6 @@ const compareByFeatures = (el1, el2) => {
   return rankB - rankA;
 };
 
-function trapecia() {
-
-
-}
 
 const filterMap = (data, cb) => {
   const mapForm = document.querySelector('.map__filters');
@@ -122,9 +125,9 @@ const filterMap = (data, cb) => {
 
     const filtered = data.sort(compareByFeatures).filter((element) => {
       if (filterByType(element, housingType.value) &&
-          filterByPrice(element, housingPrice.value) &&
-          filterByRooms(element, housingRooms.value) &&
-          filterByGuests(element, housingGuests.value)) {
+        filterByPrice(element, housingPrice.value) &&
+        filterByRooms(element, housingRooms.value) &&
+        filterByGuests(element, housingGuests.value)) {
         return true;
       }
     });
@@ -143,4 +146,11 @@ const filterMap = (data, cb) => {
   });
 };
 
-export {filterByType,filterByPrice,filterByRooms,filterByGuests,compareByFeatures, filterMap};
+export {
+  filterByType,
+  filterByPrice,
+  filterByRooms,
+  filterByGuests,
+  compareByFeatures,
+  filterMap
+};
