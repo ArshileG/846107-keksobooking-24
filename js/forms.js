@@ -89,7 +89,11 @@ const capacityValidator = () => {
 
   adFormRooms.addEventListener('change', (evt)=> {
 
-    adFormGuests.value = evt.target.value;
+    if(+evt.target.value === 100){
+      adFormGuests.value = 0;
+    } else {
+      adFormGuests.value = evt.target.value;
+    }
 
     const adFormGuestsList = adFormGuests.querySelectorAll('option');
     const roomsNumber = parseInt(evt.target.value, 10);
