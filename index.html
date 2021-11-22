@@ -88,7 +88,7 @@
               <img src="img/muffin-grey.svg" alt="Аватар пользователя" width="40" height="44">
             </div>
             <div class="ad-form__field">
-              <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden">
+              <input type="file" id="avatar" name="avatar" class="ad-form-header__input visually-hidden" accept="image/x-png,image/gif,image/jpeg">
               <label class="ad-form-header__drop-zone" for="avatar">Загрузить<br>фото...</label>
             </div>
             <p class="ad-form-header__info">Заполните все обязательные поля, назначьте цену, загрузите аватар и фото жилья. Придумайте интересное описание. Оно сделает объявление более живым и привлекательным. Получившееся объявление должно давать гостям полное представление о вашем жилье.</p>
@@ -100,7 +100,7 @@
         </fieldset>
         <fieldset class="ad-form__element ad-form__element--wide">
           <label class="ad-form__label" for="address">Адрес (координаты)</label>
-          <input id="address" name="address" type="text">
+          <input id="address" name="address" type="text" readonly>
         </fieldset>
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
@@ -121,7 +121,7 @@
           <select id="timein" name="timein">
             <option value="12:00" selected>После 12</option>
             <option value="13:00">После 13</option>
-            <option value="14:00">Послggе 14</option>
+            <option value="14:00">После 14</option>
           </select>
           <select id="timeout" name="timeout" title="Time to go out">
             <option value="12:00" selected>Выезд до 12</option>
@@ -134,7 +134,7 @@
           <select id="room_number" name="rooms">
             <option value="1" selected>1 комната</option>
             <option value="2">2 комнаты</option>
-            <option value="3">3 комнаты</option>
+            <option value="3" selected>3 комнаты</option>
             <option value="100">100 комнат</option>
           </select>
         </fieldset>

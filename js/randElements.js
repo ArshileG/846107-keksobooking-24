@@ -5,6 +5,7 @@ const OFFERS_RUS = {
   bungalow: 'Бунгало',
   hotel: 'Отель',
 };
+const POPUP_IMG_WIDTH = 45, POPUP_IMG_HEIGHT = 40;
 
 
 function createCardFromData(data) {
@@ -38,20 +39,19 @@ function createCardFromData(data) {
   popupType.textContent = OFFERS_RUS[data.offer.type];
 
   const popupDesc = fragment.querySelector('.popup__description');
-  '';
   if (data.offer.description) {
     popupDesc.textContent = data.offer.description;
   }
 
   const popupPhotos = fragment.querySelector('.popup__photos');
   popupPhotos.innerHTML = '';
-  const checkPhoto = data.offer.photos;
-  if (checkPhoto) {
+  const offerPhotos = data.offer.photos;
+  if (offerPhotos) {
     data.offer.photos.forEach((photoLink) => {
       const popupImg = document.createElement('img');
       popupImg.src = photoLink;
-      popupImg.width = 45;
-      popupImg.height = 40;
+      popupImg.width = POPUP_IMG_WIDTH;
+      popupImg.height = POPUP_IMG_HEIGHT;
       popupImg.classList.add('popup__photo');
       popupPhotos.appendChild(popupImg);
     });

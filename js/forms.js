@@ -1,5 +1,5 @@
-import {startingLat, startingLng, resetMap} from './map.js';
-import { sendData } from './API.js';
+import { resetMap, MAP_SETTINGS} from './map.js';
+import { sendData } from './api.js';
 
 const adForm = document.querySelector('.ad-form');
 const adFormPrice = document.querySelector('#price');
@@ -21,7 +21,7 @@ const disableForm = () => {
   });
 };
 const activateForm = () => {
-  adFormAddress.value = `${startingLat.toFixed(5)}, ${startingLng.toFixed(5)}`;
+  adFormAddress.value = `${MAP_SETTINGS.baseLat.toFixed(5)}, ${MAP_SETTINGS.baseLng.toFixed(5)}`;
   adForm.classList.remove('ad-form--disabled');
   const adFormElements = adForm.querySelectorAll('fieldset');
   adFormElements.forEach((adFormElement) => {
@@ -97,16 +97,16 @@ const capacityValidator = () => {
 
     adFormGuestsList.forEach((element) => {
 
-      const guestN = parseInt(element.value, 10);
+      const guestsNumber = parseInt(element.value, 10);
 
       if(roomsNumber !== 100){
-        if (guestN <= roomsNumber && guestN !== 0) {
+        if (guestsNumber <= roomsNumber && guestsNumber !== 0) {
           element.removeAttribute('disabled');
         } else {
           element.setAttribute('disabled', '');
         }
       } else {
-        if (guestN !== 0) {
+        if (guestsNumber !== 0) {
           element.setAttribute('disabled', '');
         } else {
           element.removeAttribute('disabled');
@@ -128,6 +128,20 @@ const adFormSubmit = (onSuccess, onFail) => {
   });
 };
 
+const adFormReset = () => {
+  adForm.reset();
+  adFormPrice.placeholder = minPriceForTypes[adFormTypes.value];
+  adFormPrice.setAttribute('min', minPriceForTypes.flat);
+  adFormAddress.value = `${MAP_SETTINGS.baseLat.toFixed(5)}, ${MAP_SETTINGS.baseLat.toFixed(5)}`;
+
+};
+
+const resetAll = () => {
+  resetMap();
+  mapFilter.reset();
+  adFormReset();
+};
+
 const successMsg = () => {
   const successMsgTemplate = document.querySelector('#success').content;
   const successMsgDiv = successMsgTemplate.querySelector('.success');
@@ -135,12 +149,14 @@ const successMsg = () => {
   const successFragment = successMsgDiv.cloneNode(true);
   document.body.appendChild(successFragment);
 
-  document.addEventListener('keydown', (evt)=> {
+  const successSpace = document.querySelector('.success');
+
+  successSpace.addEventListener('keydown', (evt)=> {
     if(evt.key === 'Escape'){
       successFragment.remove();
     }
   });
-  document.addEventListener('click', ()=> {
+  successSpace.addEventListener('click', ()=> {
     successFragment.remove();
   });
 
@@ -150,36 +166,23 @@ const errorMsg = () => {
   const errorMsgTemplate = document.querySelector('#error').content;
   const errorMsgDiv = errorMsgTemplate.querySelector('.error');
 
+
   const errorFragment = errorMsgDiv.cloneNode(true);
   document.body.appendChild(errorFragment);
 
-  document.addEventListener('keydown', (evt)=> {
+  const errorSpace = document.querySelector('.error');
+
+  errorSpace.addEventListener('keydown', (evt)=> {
     if(evt.key === 'Escape'){
       errorFragment.remove();
     }
   });
-  document.addEventListener('click', ()=> {
+  errorSpace.addEventListener('click', ()=> {
     errorFragment.remove();
   });
 
-  const tryAgainBtn = document.querySelector('error__button');
-  tryAgainBtn.addEventListener('submit', ()=> {
-    errorFragment.remove();
-  });
 };
 
-const adFormReset = () => {
-  adForm.reset();
-  adFormPrice.placeholder = minPriceForTypes[adFormTypes.value];
-  adFormAddress.value = `${startingLat.toFixed(5)}, ${startingLng.toFixed(5)}`;
-
-};
-
-function resetAll() {
-  resetMap();
-  mapFilter.reset();
-  adFormReset();
-}
 
 titleValdiator();
 timeInOutValidator();

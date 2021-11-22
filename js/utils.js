@@ -27,5 +27,17 @@ const getRandomItemsArray = (array, itemsNumber) => {
   }
   return randArray;
 };
+const debounce = (callback, timeoutDelay = 0) => {
+  let timeoutId;
+
+  return (...rest) => {
+
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+
+  };
+};
+
+export {debounce};
 
 export {randNumber, randFloatingNumber, checkStrLength,getRandomItemsArray};
