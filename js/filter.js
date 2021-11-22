@@ -1,15 +1,11 @@
-import {
-  resetAll
-} from './forms.js';
-import {
-  debounce
-} from './utils.js';
+import {resetAll} from './forms.js';
+import { debounce} from './utils.js';
 
 const PRICE_TYPES = {
   low: 10000,
   middle: {
     min: 10000,
-    max: 50000
+    max: 50000,
   },
   high: 50000,
 };
